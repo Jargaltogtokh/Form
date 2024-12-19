@@ -1,4 +1,13 @@
-export const StepTwo = ({ setCurrentStep, onChange, form }) => {
+import { validateStepTwo } from "@/utils/validateStepTwo";
+import { Input } from "./Input";
+
+export const StepTwo = ({
+  setCurrentStep,
+  onChange,
+  form,
+  errors,
+  setErrors,
+}) => {
   return (
     <div className="w-full h-screen flex justify-center bg-[#F4F4F4]">
       <div className="w-[480px] h-[655px] border-2 bg-white mt-[182px]">
@@ -10,70 +19,61 @@ export const StepTwo = ({ setCurrentStep, onChange, form }) => {
             Please provide us all current information accurately.{" "}
           </p>
           <form>
-            <label className="block text-sm/6 font-bold text-gray-900">
-              Email *
-            </label>
-            <input
+            <Input
               id="email"
-              required
               type="email"
-              placeholder="Placeholder "
+              label="Email *"
+              placeholder="Placeholder"
               value={form.email}
               onChange={onChange}
-              className="w-full outline-2 mr-1 peer border border-gray-500 rounded-md p-2 mb-[12px]  hover:border-blue-600"
+              error={errors.email}
             />
-            <p className="mt-2 invisible peer:invalid-visible text-red-500">
-              Please provide a valid email address
-            </p>
-
-            <label className="block text-sm/6 font-bold text-gray-900 ">
-              Phone number *
-            </label>
-            <input
+            <Input
               id="phoneNumber"
-              required
               type="number"
+              label="Phone number *"
+              placeholder="Placeholder"
               value={form.phoneNumber}
               onChange={onChange}
-              placeholder="Placeholder "
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px]  hover:border-blue-600"
+              error={errors.phoneNumber}
             />
-            <label className="block text-sm/6 font-bold text-gray-900">
-              Password *
-            </label>
-            <input
+            <Input
               id="password"
-              required
               type="password"
-              placeholder="Placeholder "
+              label="Password *"
+              placeholder="Placeholder"
               value={form.password}
               onChange={onChange}
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px]  hover:border-blue-600"
+              error={errors.password}
             />
-            <label className="block text-sm/6 font-bold text-gray-900 ">
-              Confirm Password *
-            </label>
-            <input
-              id="password"
-              required
+            <Input
+              id="confirmPassword"
               type="password"
-              placeholder="Placeholder "
-              value={form.password}
+              label=" Confirm Password *"
+              placeholder="Placeholder"
+              value={form.confirmPassword}
               onChange={onChange}
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px]  hover:border-blue-600"
+              error={errors.confirmPasswordassword}
             />
           </form>
+
           <div className="flex">
             <button
+              className="w-1/3 outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mt-[10px] hover:bg-black hover:text-white"
               onClick={() => setCurrentStep(1)}
-              className="w-1/3 outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mt-[80px] hover:bg-black hover:text-white"
             >
               {" "}
               Back
             </button>
             <button
-              onClick={() => setCurrentStep(3)}
-              className="w-2/3 outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mt-[80px] hover:bg-black hover:text-white"
+              className="w-2/3 outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mt-[10px] hover:bg-black hover:text-white"
+              onClick={() => {
+                const { isValid, newErrors } = validateStepTwo(form);
+                setErrors(newErrors);
+                if (isValid) {
+                  setCurrentStep(3);
+                }
+              }}
             >
               Continue 2/3 {">"}
             </button>

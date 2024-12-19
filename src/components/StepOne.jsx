@@ -1,4 +1,13 @@
-export const StepOne = ({ setCurrentStep, onChange, form }) => {
+import { validateStepOne } from "@/utils/validate";
+import { Input } from "./Input";
+
+export const StepOne = ({
+  setCurrentStep,
+  onChange,
+  form,
+  errors,
+  setErrors,
+}) => {
   return (
     <div className="w-full h-screen flex justify-center bg-[#F4F4F4]">
       <div className="w-[480px] h-[655px] border-2 bg-white mt-[182px]">
@@ -10,45 +19,43 @@ export const StepOne = ({ setCurrentStep, onChange, form }) => {
             Please provide us all current information accurately.{" "}
           </p>
           <form>
-            <label className="block text-sm/6 font-bold text-gray-900">
-              First Name *
-            </label>
-            <input
+            <Input
               id="firstName"
               type="text"
+              label="First Name"
               placeholder="Placeholder"
               value={form.firstName}
               onChange={onChange}
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px] hover:border-blue-600 required"
-            />{" "}
-            <label className="block text-sm/6 font-bold text-gray-900">
-              Last Name *
-            </label>
-            <input
+              error={errors.firstName}
+            />
+            <Input
               id="lastName"
-              required
               type="text"
-              placeholder="Placeholder "
+              label="Last Name"
+              placeholder="Placeholder"
               value={form.lastName}
               onChange={onChange}
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px] hover:border-blue-600"
-            />{" "}
-            <label className="block text-sm/6 font-bold text-gray-900">
-              Username *
-            </label>
-            <input
+              error={errors.lastName}
+            />
+            <Input
               id="userName"
-              required
               type="text"
-              placeholder="Placeholder "
+              label="Username"
+              placeholder="Placeholder"
               value={form.userName}
               onChange={onChange}
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px]  hover:border-blue-600"
+              error={errors.userName}
             />
           </form>
           <button
-            onClick={() => setCurrentStep(2)}
-            className="w-full outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mt-[190px] hover:bg-black hover:text-white"
+            className="w-full outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mb-[40px] hover:bg-black hover:text-white"
+            onClick={() => {
+              const { isValid, newErrors } = validateStepOne(form);
+              setErrors(newErrors);
+              if (isValid) {
+                setCurrentStep(2);
+              }
+            }}
           >
             Continue 1/3 {">"}
           </button>

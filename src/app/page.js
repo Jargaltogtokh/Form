@@ -7,13 +7,22 @@ import { StepTwo } from "@/components/StepTwo";
 import { StepThree } from "@/components/StepThree";
 import { StepFour } from "@/components/StepFour";
 
-const FormBody = ({ currentStep, setCurrentStep, onChange, form }) => {
+const FormBody = ({
+  currentStep,
+  setCurrentStep,
+  onChange,
+  form,
+  errors,
+  setErrors,
+}) => {
   if (currentStep === 1) {
     return (
       <StepOne
         setCurrentStep={setCurrentStep}
         onChange={onChange}
         form={form}
+        errors={errors}
+        setErrors={setErrors}
       />
     );
   }
@@ -23,6 +32,8 @@ const FormBody = ({ currentStep, setCurrentStep, onChange, form }) => {
         setCurrentStep={setCurrentStep}
         onChange={onChange}
         form={form}
+        errors={errors}
+        setErrors={setErrors}
       />
     );
   }
@@ -32,6 +43,8 @@ const FormBody = ({ currentStep, setCurrentStep, onChange, form }) => {
         setCurrentStep={setCurrentStep}
         onChange={onChange}
         form={form}
+        errors={errors}
+        setErrors={setErrors}
       />
     );
   }
@@ -47,6 +60,18 @@ export default function Home() {
     email: "",
     phoneNumber: "",
     password: "",
+    confirmPassword: "",
+    dateOfBirth: "",
+    profileImage: "",
+  });
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
     dateOfBirth: "",
     profileImage: "",
   });
@@ -66,6 +91,8 @@ export default function Home() {
         setCurrentStep={setCurrentStep}
         onChange={onChange}
         form={form}
+        errors={errors}
+        setErrors={setErrors}
       />
     </>
   );

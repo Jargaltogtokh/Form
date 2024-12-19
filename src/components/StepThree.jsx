@@ -1,3 +1,5 @@
+import { Input } from "./Input";
+
 export const StepThree = ({ setCurrentStep, onChange, form }) => {
   return (
     <div className="w-full h-screen flex justify-center bg-[#F4F4F4]">
@@ -10,30 +12,20 @@ export const StepThree = ({ setCurrentStep, onChange, form }) => {
             Please provide us all current information accurately.{" "}
           </p>
           <form action="">
-            <label className="block text-sm/6 font-bold text-gray-900">
-              Date of Birth *
-            </label>
-            <input
+            <Input
               id="dateOfBirth"
-              name="First Name"
               type="date"
+              label="Date of Birth * "
+              placeholder="--/--/--"
               value={form.dateOfBirth}
               onChange={onChange}
-              placeholder="--/--/-- "
-              className="w-full outline-2 mr-1 border border-gray-500 rounded-md p-2 mb-[12px]"
             />
-
-            <label className="block text-sm/6 font-bold text-gray-900">
-              Profile Image *
-            </label>
-            <input
+            <Input
               id="profileImage"
               type="file"
+              label="Profile Image *"
               value={form.profileImage}
               onChange={onChange}
-              className="block w-full h-[200px] text-sm text-slate-500 border border-gray-500 rounded-md p-2
-             hover:file:bg-blue-600
-            "
             />
           </form>
           <div className="flex">

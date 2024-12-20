@@ -1,5 +1,6 @@
 import { validateStepOne } from "@/utils/validate";
 import { Input } from "./Input";
+import { useState } from "react";
 
 export const StepOne = ({
   setCurrentStep,
@@ -22,7 +23,7 @@ export const StepOne = ({
             <Input
               id="firstName"
               type="text"
-              label="First Name"
+              label="First Name *"
               placeholder="Placeholder"
               value={form.firstName}
               onChange={onChange}
@@ -31,7 +32,7 @@ export const StepOne = ({
             <Input
               id="lastName"
               type="text"
-              label="Last Name"
+              label="Last Name *"
               placeholder="Placeholder"
               value={form.lastName}
               onChange={onChange}
@@ -40,13 +41,14 @@ export const StepOne = ({
             <Input
               id="userName"
               type="text"
-              label="Username"
+              label="Username *"
               placeholder="Placeholder"
               value={form.userName}
               onChange={onChange}
               error={errors.userName}
             />
           </form>
+
           <button
             className="w-full outline-2 mr-1 border border-[#D6D8D8] bg-[#D6D8D8] rounded-md p-2 mb-[40px] hover:bg-black hover:text-white"
             onClick={() => {

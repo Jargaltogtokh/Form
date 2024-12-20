@@ -53,7 +53,7 @@ export const StepTwo = ({
               placeholder="Placeholder"
               value={form.confirmPassword}
               onChange={onChange}
-              error={errors.confirmPasswordassword}
+              error={errors.confirmPassword}
             />
           </form>
 

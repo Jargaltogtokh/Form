@@ -1,3 +1,8 @@
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+const phoneRegex = /^\d{8}$/;
+const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[._\-!@#$%^&*()`=]).+$/;
+
 export const validateStepTwo = (form) => {
   let isValid = true;
 
@@ -8,14 +13,18 @@ export const validateStepTwo = (form) => {
     confirmPassword: "",
   };
 
-  if (form.email === "") {
+  if (form.email.trim() === "") {
     isValid = false;
-    newErrors.firstName = "Please provide a valid email address";
+    newErrors.email = "Email is required";
+  } else if (!emailRegex.test(form.email)) {
+    isValid = false;
+    newErrors.email = "Please provide a valid email address";
   }
 
-  if (form.phoneNumber.length !== 8) {
+  if (!phoneRegex.test(form.phoneNumber)) {
     isValid = false;
-    newErrors.phoneNumber = "Please provide a valid phone number";
+    console.log(form.phoneNumber);
+    newErrors.phoneNumber = "Please provide a valid 8-digit phone number";
   }
 
   if (form.password.length < 8) {
@@ -25,7 +34,13 @@ export const validateStepTwo = (form) => {
 
   if (form.confirmPassword !== form.password) {
     isValid = false;
-    newErrors.password = "Password doesn't match";
+    newErrors.confirmPassword = "Passwords do not match";
+  }
+  if (!passwordRegex.test(form.password)) {
+    isValid = false;
+    console.log(form.password);
+    newErrors.password =
+      "Password must contain at least one upper case letter, lower case letter, one number and one special character";
   }
 
   return { isValid, newErrors };

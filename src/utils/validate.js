@@ -7,18 +7,26 @@ export const validateStepOne = (form) => {
     userName: "",
   };
 
-  if (form.firstName === "") {
-    newErrors.firstName = "This field is mandatory";
+  const nameRegex = /^[a-zA-Z]+$/;
+
+  if (form.firstName.trim() === "") {
     isValid = false;
+    newErrors.firstName = "First Name is required";
+  } else if (!nameRegex.test(form.firstName)) {
+    isValid = false;
+    newErrors.firstName = "First Name can only contain letters";
   }
 
-  if (form.lastName === "") {
-    newErrors.lastName = "This field is mandatory";
+  if (form.lastName.trim() === "") {
     isValid = false;
+    newErrors.lastName = "Last Name is required";
+  } else if (!nameRegex.test(form.lastName)) {
+    isValid = false;
+    newErrors.lastName = "Last Name can only contain letters";
   }
 
-  if (form.userName === "") {
-    newErrors.userName = "This field is mandatory";
+  if (form.userName.trim() === "") {
+    newErrors.userName = "Username is required";
     isValid = false;
   }
 
